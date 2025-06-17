@@ -8,10 +8,10 @@ LDFLAGS = -L$(SFML_PATH)/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-
 
 # Default target
 run:
-	mkdir -p bin
-	$(CXX) ./src/$(FILE).cpp $(CXXFLAGS) $(LDFLAGS) -o bin/$(FILE)
-	./bin/$(FILE)
+	mkdir -p build
+	$(CXX) ./src/$(FILE).cpp $(CXXFLAGS) $(LDFLAGS) -o build/$(FILE)
+	./build/$(FILE)
 
 # Clean build
 clean:
-	rm -rf bin
+	rm -rf build
