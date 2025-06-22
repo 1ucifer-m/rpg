@@ -10,8 +10,10 @@ void Skeleton::load(){
 
     int xindex = 0; // X index of the sprite in the spritesheet
     int yindex = 2; // Y index of the sprite in the spritesheet
-    sprite.setTextureRect(sf::IntRect(xindex*64, yindex*64, 64, 64)); // Assuming each sprite is 64x64 pixels
+    sprite.setTextureRect(sf::IntRect(xindex*size.x, yindex*size.y, size.x, size.y)); // Assuming each sprite is 64x64 pixels
     sprite.scale(sf::Vector2f(1.5,1.5)); // Scale the sprite to 2x its original size
+
+    hitbox.setSize(sf::Vector2f(size.x*sprite.getScale().x,size.y*sprite.getScale().y));
     }
     else{
         std::cout << "Failed to load skeleton texture!" << std::endl;
@@ -19,10 +21,18 @@ void Skeleton::load(){
 }
 void Skeleton::initialize() {
 
-}
-void Skeleton::update() {
+    hitbox.setFillColor(sf::Color::Transparent);
+    hitbox.setOutlineColor(sf::Color::Blue);
+    hitbox.setOutlineThickness(0.5f);
 
+    size = sf::Vector2i(64, 64); // Set the size of the hitbox to match the sprite size
+
+}
+void Skeleton::update(float deltaTime) {
+
+    hitbox.setPosition(sprite.getPosition());
 }
 void Skeleton::draw(sf::RenderWindow& window) {
     window.draw(sprite);
+    window.draw(hitbox);
 }

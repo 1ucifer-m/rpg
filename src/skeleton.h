@@ -8,10 +8,14 @@ class Skeleton {
 
     public:
         sf::Sprite sprite;
+
+        sf::RectangleShape hitbox;
+
+        sf::Vector2i size;
     public:
 
         void load();
         void initialize();
         void draw(sf::RenderWindow& window);
-        void update();
+        void update(float deltaTime);
 };
