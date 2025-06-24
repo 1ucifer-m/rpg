@@ -14,6 +14,8 @@ class Skeleton {
         sf::Vector2i size;
     public:
 
+        Skeleton();
+        ~Skeleton();
         void load();
         void initialize();
         void draw(sf::RenderWindow& window);

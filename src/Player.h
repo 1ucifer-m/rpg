@@ -8,8 +8,8 @@ class Player {
         sf::Texture texture;
 
         std::vector<sf::RectangleShape> bullets; // Vector to hold multiple bullets
-        float bulletspeed = 0.25f; // Speed of the bullet
-        float playerSpeed = .5f; // Speed of the player
+        float bulletspeed;
+        float playerSpeed;
 
         sf::RectangleShape hitbox;
 
@@ -18,6 +18,9 @@ class Player {
     public:
         sf::Sprite sprite;
     public:
+
+        Player();
+        ~Player();
 
         void load();
         void initialize();

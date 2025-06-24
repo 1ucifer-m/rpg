@@ -3,6 +3,13 @@
 #include "Math.h"
 
 
+Player::Player() :bulletspeed(0.25f),playerSpeed(.5f) {
+    
+}
+
+Player::~Player() {
+    
+}
 void Player::initialize() {
     hitbox.setFillColor(sf::Color::Transparent);
     hitbox.setOutlineColor(sf::Color::Red);

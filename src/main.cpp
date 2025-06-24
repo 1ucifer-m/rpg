@@ -3,6 +3,7 @@
 
 #include "Player.h"
 #include "skeleton.h"
+#include "framerate.h"
 
 /*
 DIVIDE ALL PIXELS BY TWO
@@ -21,23 +22,30 @@ int main()
         window.setFramerateLimit(120);
     //____________________INITIALIZE____________________
     
+
+
+
     Player player;
     Skeleton skeleton;
+    framerate framerate;
 
+    framerate.initialize();
     player.initialize();
     skeleton.initialize();
+
+
+    framerate.load();
     player.load();
     skeleton.load();
+
 
 
     sf::Clock clock;
 
     while (window.isOpen()){
 
-
         sf::Time deltaTimeTimer = clock.restart();
-        float deltaTime = deltaTimeTimer.asMilliseconds();
-
+        double deltaTime = deltaTimeTimer.asMicroseconds()/1000.0;
         //____________________UPDATE____________________
         sf::Event event;
         while(window.pollEvent(event)){
@@ -45,15 +53,17 @@ int main()
             if(event.type == sf::Event::Closed)
                 window.close();
         }
-
-
+ 
+            framerate.update(deltaTime);
             skeleton.update(deltaTime);
             player.update(deltaTime, skeleton);
+
         //____________________UPDATE____________________
         //_____________________DRAW_____________________
             window.clear(sf::Color::Black);
             skeleton.draw(window);
             player.draw(window);
+            framerate.draw(window);
             window.display();
 
         //_____________________DRAW_____________________

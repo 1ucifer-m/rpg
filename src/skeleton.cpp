@@ -1,6 +1,12 @@
 #include"skeleton.h"
 #include <iostream>
 
+Skeleton::Skeleton() {
+   
+}
+Skeleton::~Skeleton() {
+
+}
 void Skeleton::load(){
 
     if(texture.loadFromFile("/Users/jessysha/Desktop/rpg/assets/skeleton/textures/spritesheet.png")){
