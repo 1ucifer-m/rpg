@@ -17,7 +17,7 @@ public:
     void draw(sf::RenderWindow& window);
     void update(float deltaTime);
 
-    inline const sf::FloatRect& getGlobalBounds() {
+    inline const sf::FloatRect getGlobalBounds() const {
 
         return shape.getGlobalBounds();
     }
