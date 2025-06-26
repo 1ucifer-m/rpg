@@ -53,10 +53,11 @@ int main()
             if(event.type == sf::Event::Closed)
                 window.close();
         }
- 
+
+            sf::Vector2f mousePos = sf::Vector2f(sf::Mouse::getPosition(window));
             framerate.update(deltaTime);
             skeleton.update(deltaTime);
-            player.update(deltaTime, skeleton);
+            player.update(deltaTime, skeleton, mousePos);
 
         //____________________UPDATE____________________
         //_____________________DRAW_____________________

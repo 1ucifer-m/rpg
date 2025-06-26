@@ -11,7 +11,7 @@ framerate::~framerate() {
     
 }
 void framerate::load() {
-       if(font.loadFromFile("/Users/jessysha/Desktop/rpg/assets/fonts/times.ttf")){
+    if(font.loadFromFile("/Users/jessysha/Desktop/rpg/assets/fonts/times.ttf")){
         std::cout << "Font loaded successfully!" << std::endl;
         framerateText.setFont(font);
     }

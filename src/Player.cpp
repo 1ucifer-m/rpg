@@ -3,7 +3,7 @@
 #include "Math.h"
 
 
-Player::Player() :bulletspeed(0.25f),playerSpeed(.5f) {
+Player::Player() :playerSpeed(.5f),maxFireRate(150),fireRateTimer(0.0f){
     
 }
 
@@ -37,7 +37,7 @@ void Player::load() {
         std::cout << "Failed to load player texture!" << std::endl;
     }
 }
-void Player::update(float deltaTime, Skeleton& skeleton) {
+void Player::update(float deltaTime, Skeleton& skeleton, sf::Vector2f& mousePos) {
 
             sf::Vector2f pos = sprite.getPosition();
 
@@ -54,32 +54,39 @@ void Player::update(float deltaTime, Skeleton& skeleton) {
                 sprite.setPosition(pos + sf::Vector2f(0,1) * playerSpeed * deltaTime); // Move down
 
 
-                if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+                //___________________________________________________________________________________________
+               fireRateTimer += deltaTime;
+                
+                if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && fireRateTimer >= maxFireRate){
+               
+                bullets.push_back(Bullet());
 
-                sf::RectangleShape newbullet(sf::Vector2f(25, 12.5)); // Create a new bullet
-                bullets.push_back(newbullet);
-
-                int i = bullets.size() - 1; // Get the index of the new bullet
-                bullets[i].setPosition(sprite.getPosition()); // Set the position of the new bullet to the player's position
-
+                int i = bullets.size() - 1;
+                bullets[i].initialize(sprite.getPosition(), mousePos, 0.25f);
+                fireRateTimer =0;
             }
-            for(size_t i = 0; i < bullets.size(); ++i){
-                sf::Vector2f bulletdir = skeleton.sprite.getPosition() - bullets[i].getPosition();
-                bulletdir = Math::normalizeVector(bulletdir); // Normalize the direction vector to get the unit vector
-                bullets[i].setPosition(bullets[i].getPosition() + bulletdir * bulletspeed * deltaTime); // Move the bullet towards the skeleton
+ 
+        for(size_t i = 0; i < bullets.size(); ++i){  
+            bullets[i].update(deltaTime);
+            if(skeleton.health >0){
+
+                if(Math::checkCollision(bullets[i].getGlobalBounds(),skeleton.sprite.getGlobalBounds())){
+                        
+                    skeleton.changehealth(-10);    
+                    bullets.erase(bullets.begin()+i);
+                }
             }
+        }
 
             hitbox.setPosition(sprite.getPosition());
 
-            if(Math::checkCollision(sprite.getGlobalBounds(),skeleton.sprite.getGlobalBounds())){
-                std::cout << "Collision detected!" << std::endl;
-            }
+            //____________________________________________________________________________________________
 }
 void Player::draw(sf::RenderWindow& window) {
     window.draw(sprite);
     window.draw(hitbox);
 
     for(size_t i = 0; i < bullets.size(); ++i){
-               window.draw(bullets[i]);
+               bullets[i].draw(window); 
             }
 }

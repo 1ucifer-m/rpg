@@ -1,21 +1,37 @@
 #include"skeleton.h"
 #include <iostream>
 
-Skeleton::Skeleton() {
+Skeleton::Skeleton() :health(100){
    
 }
 Skeleton::~Skeleton() {
 
 }
+void Skeleton::changehealth(int hp) {
+    
+    health += hp;
+    healthText.setString(std::to_string(health));
+}
 void Skeleton::load(){
+
+    if(font.loadFromFile("/Users/jessysha/Desktop/rpg/assets/fonts/times.ttf")){
+        std::cout << "Font loaded successfully!" << std::endl;
+        healthText.setFont(font);
+        healthText.setString(std::to_string(health));
+        healthText.setCharacterSize(15);
+    }
+    else{
+        std::cout << "Failed to load font!" << std::endl;
+    }
+
 
     if(texture.loadFromFile("/Users/jessysha/Desktop/rpg/assets/skeleton/textures/spritesheet.png")){
         std::cout << "skeleton texture loaded successfully!" << std::endl;
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(800,350)); // Set initial position of the skeleton sprite
 
-    int xindex = 0; // X index of the sprite in the spritesheet
-    int yindex = 2; // Y index of the sprite in the spritesheet
+    int xindex = 0;
+    int yindex = 2; 
     sprite.setTextureRect(sf::IntRect(xindex*size.x, yindex*size.y, size.x, size.y)); // Assuming each sprite is 64x64 pixels
     sprite.scale(sf::Vector2f(1.5,1.5)); // Scale the sprite to 2x its original size
 
@@ -34,11 +50,20 @@ void Skeleton::initialize() {
     size = sf::Vector2i(64, 64); // Set the size of the hitbox to match the sprite size
 
 }
+
 void Skeleton::update(float deltaTime) {
 
+    if(health >0){
+
     hitbox.setPosition(sprite.getPosition());
+    healthText.setPosition(sprite.getPosition());
+
+}
 }
 void Skeleton::draw(sf::RenderWindow& window) {
+    if(health >0){
     window.draw(sprite);
     window.draw(hitbox);
+    window.draw(healthText);
+    }
 }
