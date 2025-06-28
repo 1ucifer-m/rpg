@@ -6,7 +6,7 @@ class framerate{
     sf::Text framerateText;
     sf::Font font;
 
-    float timer;
+    double timer;
 
     public:
         framerate();

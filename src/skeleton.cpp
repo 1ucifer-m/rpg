@@ -51,7 +51,7 @@ void Skeleton::initialize() {
 
 }
 
-void Skeleton::update(float deltaTime) {
+void Skeleton::update(double deltaTime) {
 
     if(health >0){
 

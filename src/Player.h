@@ -11,7 +11,7 @@ class Player {
         std::vector<Bullet> bullets; // Vector to hold multiple bullets
 
         float maxFireRate;
-        float fireRateTimer;
+        double fireRateTimer;
 
         float playerSpeed;
 
@@ -29,5 +29,5 @@ class Player {
         void load();
         void initialize();
         void draw(sf::RenderWindow& window);
-        void update(float deltaTime,Skeleton& skeleton, sf::Vector2f& mousePos);
+        void update(double deltaTime,Skeleton& skeleton, sf::Vector2f& mousePos);
 };

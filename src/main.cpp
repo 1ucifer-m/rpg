@@ -32,15 +32,17 @@ int main()
     Map map;
 
     framerate.initialize();
+    map.initialize();
     player.initialize();
     skeleton.initialize();
-    map.initialize();
+
 
 
     framerate.load();
+    map.load();
     player.load();
     skeleton.load();
-    map.load();
+
 
 
 

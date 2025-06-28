@@ -29,5 +29,5 @@ class Skeleton {
         void load();
         void initialize();
         void draw(sf::RenderWindow& window);
-        void update(float deltaTime);
+        void update(double deltaTime);
 };

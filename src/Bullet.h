@@ -15,7 +15,7 @@ public:
 
     void initialize(const sf::Vector2f& pos, const sf::Vector2f& target, float speed);
     void draw(sf::RenderWindow& window);
-    void update(float deltaTime);
+    void update(double deltaTime);
 
     inline const sf::FloatRect getGlobalBounds() const {
 

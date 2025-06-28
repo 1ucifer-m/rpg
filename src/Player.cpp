@@ -37,21 +37,21 @@ void Player::load() {
         std::cout << "Failed to load player texture!" << std::endl;
     }
 }
-void Player::update(float deltaTime, Skeleton& skeleton, sf::Vector2f& mousePos) {
+void Player::update(double deltaTime, Skeleton& skeleton, sf::Vector2f& mousePos) {
 
             sf::Vector2f pos = sprite.getPosition();
 
            if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))    
-                sprite.setPosition(pos + sf::Vector2f(1,0) * playerSpeed * deltaTime); // Move right
+                sprite.setPosition(pos + sf::Vector2f(1,0) * playerSpeed * (float)deltaTime); // Move right
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-                sprite.setPosition(pos + sf::Vector2f(-1,0) * playerSpeed * deltaTime); // Move left
+                sprite.setPosition(pos + sf::Vector2f(-1,0) * playerSpeed * (float)deltaTime); // Move left
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-                sprite.setPosition(pos + sf::Vector2f(0,-1) * playerSpeed * deltaTime); // Move up
+                sprite.setPosition(pos + sf::Vector2f(0,-1) * playerSpeed * (float)deltaTime); // Move up
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-                sprite.setPosition(pos + sf::Vector2f(0,1) * playerSpeed * deltaTime); // Move down
+                sprite.setPosition(pos + sf::Vector2f(0,1) * playerSpeed * (float)deltaTime); // Move down
 
 
                 //___________________________________________________________________________________________

@@ -8,6 +8,8 @@ LDFLAGS = -L$(SFML_PATH)/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-
 
 # Get all .cpp files in ./src
 SOURCES := $(wildcard src/*.cpp)
+HEADERS := $(wildcard src/*.h)  # Added to track headers
+
 EXECUTABLE := bin/game
 
 # Default target
@@ -15,7 +17,7 @@ run: $(EXECUTABLE)
 	./$(EXECUTABLE)
 
 # Build target
-$(EXECUTABLE): $(SOURCES)
+$(EXECUTABLE): $(SOURCES) $(HEADERS)  # Added $(HEADERS) here
 	mkdir -p bin
 	$(CXX) $(SOURCES) $(CXXFLAGS) $(LDFLAGS) -o $(EXECUTABLE)
 
